@@ -12,11 +12,11 @@ public class Conta {
         this.limite = limite;
     }
 
-    public void depositar(double valor){
+    public void deposita(double valor){
         this.saldo=+valor;
     }
 
-    public boolean sacar(double valor){
+    public boolean saca(double valor){
         if (valor>this.saldo) return false;
         else {
             this.saldo=-valor;
@@ -24,8 +24,8 @@ public class Conta {
         }
     }
     public void transferir(double valor, Conta contaDestino){
-        sacar(valor);
-        contaDestino.depositar(valor);
+        saca(valor);
+        contaDestino.deposita(valor);
     }
     public double getSaldo() {
         return saldo;
