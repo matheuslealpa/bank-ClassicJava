@@ -1,33 +1,36 @@
 package domain;
 
+import java.math.BigDecimal;
+
 public class Conta {
     private Long id;
     private int agencia;
     private int conta;
     private Titular titular;
-    private double saldo;
-    private double limite;
+    private BigDecimal saldo;
+    private BigDecimal limite;
 
-    public Conta(double limite){
+    public Conta(BigDecimal limite){
         this.limite = limite;
     }
 
-    public void deposita(double valor){
-        this.saldo=+valor;
+    public void deposita(BigDecimal valor){
+        BigDecimal deposito = valor;
+        saldo.add(deposito);
     }
 
-    public boolean saca(double valor){
-        if (valor>this.saldo) return false;
-        else {
-            this.saldo=-valor;
-            return true;
+    public void saca(BigDecimal valor){
+        if (this.saldo.add(this.limite).doubleValue() >= valor.doubleValue()){
+        	this.saldo.subtract(valor);
+        }else{
+            throw new IllegalArgumentException("CLiente sem limite disponível");
         }
     }
-    public void transferir(double valor, Conta contaDestino){
+    public void transferir(BigDecimal valor, Conta contaDestino){
         saca(valor);
         contaDestino.deposita(valor);
     }
-    public double getSaldo() {
+    public BigDecimal getSaldo() {
         return saldo;
     }
 }
