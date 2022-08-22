@@ -2,7 +2,7 @@ package domain;
 
 import java.math.BigDecimal;
 
-public class Conta {
+public abstract class Conta {
     private Long id;
     private int agencia;
     private int conta;
